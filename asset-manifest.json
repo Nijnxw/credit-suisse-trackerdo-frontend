@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/credit-suisse-trackerdo-frontend/static/css/main.9d5b29c0.chunk.css",
-    "main.js": "/credit-suisse-trackerdo-frontend/static/js/main.dce0cfb1.chunk.js",
-    "main.js.map": "/credit-suisse-trackerdo-frontend/static/js/main.dce0cfb1.chunk.js.map",
-    "runtime-main.js": "/credit-suisse-trackerdo-frontend/static/js/runtime-main.aeeccd81.js",
-    "runtime-main.js.map": "/credit-suisse-trackerdo-frontend/static/js/runtime-main.aeeccd81.js.map",
-    "static/js/2.1242130b.chunk.js": "/credit-suisse-trackerdo-frontend/static/js/2.1242130b.chunk.js",
-    "static/js/2.1242130b.chunk.js.map": "/credit-suisse-trackerdo-frontend/static/js/2.1242130b.chunk.js.map",
-    "static/js/3.bf44bd3b.chunk.js": "/credit-suisse-trackerdo-frontend/static/js/3.bf44bd3b.chunk.js",
-    "static/js/3.bf44bd3b.chunk.js.map": "/credit-suisse-trackerdo-frontend/static/js/3.bf44bd3b.chunk.js.map",
+    "main.css": "/credit-suisse-trackerdo-frontend/static/css/main.8c8b27cf.chunk.css",
+    "main.js": "/credit-suisse-trackerdo-frontend/static/js/main.a1c6f808.chunk.js",
+    "main.js.map": "/credit-suisse-trackerdo-frontend/static/js/main.a1c6f808.chunk.js.map",
+    "runtime-main.js": "/credit-suisse-trackerdo-frontend/static/js/runtime-main.85d78f04.js",
+    "runtime-main.js.map": "/credit-suisse-trackerdo-frontend/static/js/runtime-main.85d78f04.js.map",
+    "static/js/2.3d130c34.chunk.js": "/credit-suisse-trackerdo-frontend/static/js/2.3d130c34.chunk.js",
+    "static/js/2.3d130c34.chunk.js.map": "/credit-suisse-trackerdo-frontend/static/js/2.3d130c34.chunk.js.map",
+    "static/js/3.f30330ef.chunk.js": "/credit-suisse-trackerdo-frontend/static/js/3.f30330ef.chunk.js",
+    "static/js/3.f30330ef.chunk.js.map": "/credit-suisse-trackerdo-frontend/static/js/3.f30330ef.chunk.js.map",
     "index.html": "/credit-suisse-trackerdo-frontend/index.html",
-    "static/css/main.9d5b29c0.chunk.css.map": "/credit-suisse-trackerdo-frontend/static/css/main.9d5b29c0.chunk.css.map",
-    "static/js/2.1242130b.chunk.js.LICENSE.txt": "/credit-suisse-trackerdo-frontend/static/js/2.1242130b.chunk.js.LICENSE.txt",
+    "static/css/main.8c8b27cf.chunk.css.map": "/credit-suisse-trackerdo-frontend/static/css/main.8c8b27cf.chunk.css.map",
+    "static/js/2.3d130c34.chunk.js.LICENSE.txt": "/credit-suisse-trackerdo-frontend/static/js/2.3d130c34.chunk.js.LICENSE.txt",
     "static/media/logo.6ce24c58.svg": "/credit-suisse-trackerdo-frontend/static/media/logo.6ce24c58.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.aeeccd81.js",
-    "static/js/2.1242130b.chunk.js",
-    "static/css/main.9d5b29c0.chunk.css",
-    "static/js/main.dce0cfb1.chunk.js"
+    "static/js/runtime-main.85d78f04.js",
+    "static/js/2.3d130c34.chunk.js",
+    "static/css/main.8c8b27cf.chunk.css",
+    "static/js/main.a1c6f808.chunk.js"
   ]
 }
