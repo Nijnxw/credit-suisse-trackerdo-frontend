@@ -1,0 +1,69 @@
+/*
+ * Style for all navigation bars.
+ */
+ .NavigationBar {
+  background-color: white;
+  width: 100%;
+  flex: 0 0 auto;
+  .thin-divider {
+    /* Used to lessen the space between icon-only buttons (on small displays). */
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  .navbar-button-text {
+    /* This provides some space between the icon and the text on larger displays. */
+    margin-left: 0.2rem;
+  }
+}
+
+.NavigationBar__link :first-child {
+  /* An even margin is kept (instead of the right side having a higher margin)
+   * to allow for even spacing when viewed on mobile.
+   */
+  margin-left: 0.1rem !important;
+  margin-right: 0.1rem !important;
+}
+
+/*
+ * Style for the navigation bar of the entire site (used in Application)
+ */
+.primary-navbar {
+  .pt-button {
+    font-weight: 500;
+  }
+  .pt-navbar-heading {
+    text-transform: uppercase;
+    padding: 1.5px 0 0 4px;
+  }
+
+  .navbar-username {
+    margin-left: 0;
+  }
+}
+
+.Popover-share {
+  h4 {
+    margin: 0.3rem 0.5rem 0.3rem 0;
+  }
+
+  .Popover-status-content {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+/*
+ * Style for the navigation bar of particular sections (e.g Academy). This is the
+ * "nested" navigation bar under the primary one.
+ */
+.secondary-navbar {
+  height: 40px;
+  .pt-navbar-group {
+    height: 40px;
+  }
+  /* Create less emphasis on secondary navbar buttons */
+  .pt-button {
+    text-transform: initial;
+    font-weight: 250;
+  }
+}

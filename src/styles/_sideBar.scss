@@ -1,0 +1,27 @@
+.SideBar {
+  background-color: $color-5;
+  max-width: 240px;
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.SideBar__link {
+  margin-left: 0.1rem !important;
+  margin-right: 0.1rem !important;
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  border-radius: 2px;
+  color: inherit;
+  line-height: 20px;
+  padding: 5px 7px;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.menu-item-label {
+  margin-left: 0.5rem !important;
+}
