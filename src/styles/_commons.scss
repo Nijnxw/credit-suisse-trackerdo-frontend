@@ -1,14 +1,24 @@
+header {
+  display: flex;
+}
+
 .PageContainer {
   background-color: $color-5;
-  height: 100vh;
+  height: calc(100vh - 54px);
   width: 100%;
+  display: flex;
   flex: 1;
+  flex-direction: row;
 }
 
 .page {
   width: 100%;
-  max-width: 1000px;
-  box-sizing: border-box;
-  margin: 16px auto;
   padding: 0 16px;
+  overflow-y: auto;
+}
+
+footer {
+  flex: 0 0 50px;
+  width: 100%;
+  background-color: var(--orange);
 }
