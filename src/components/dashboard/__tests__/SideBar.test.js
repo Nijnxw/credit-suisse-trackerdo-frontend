@@ -1,0 +1,3 @@
+test('SideBar renders correctly', () => {
+
+});
