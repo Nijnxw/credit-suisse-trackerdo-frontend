@@ -1,0 +1,4 @@
+
+test('renders inbox page', () => {
+
+});

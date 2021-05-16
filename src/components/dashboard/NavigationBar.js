@@ -22,7 +22,7 @@ const NavigationBar = () => {
         <NavLink
           activeClassName="pt-active"
           className="NavigationBar__link pt-button pt-minimal"
-          to="/app/add-task"
+          to="/app/progress"
         >
           <Icon icon={IconNames.TRENDING_UP} />
         </NavLink>
@@ -34,7 +34,7 @@ const NavigationBar = () => {
         <NavLink
           activeClassName="pt-active"
           className="NavigationBar__link pt-button pt-minimal"
-          to="/app/add-task"
+          to="/app/inbox/add-task"
         >
           <Icon icon={IconNames.PLUS} />
         </NavLink>
@@ -46,7 +46,7 @@ const NavigationBar = () => {
         <NavLink
           activeClassName="pt-active"
           className="NavigationBar__link pt-button pt-minimal"
-          to="/app/add-task"
+          to="/app/notifications"
         >
             <Icon icon={IconNames.NOTIFICATIONS} />
         </NavLink>

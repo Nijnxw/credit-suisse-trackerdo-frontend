@@ -1,16 +1,23 @@
 import React, { Fragment } from "react"
-import NavigationBar from "../dashboard/NavigationBar";
-import SideBar from "../dashboard/SideBar";
+import NavigationBar from "../dashboard/NavigationBar"
+import SideBar from "../dashboard/SideBar"
 
-const PageContainer = ({ children, showSideBar = false, className}) => {
+const PageContainer = (props) => {
+  const { 
+    children,
+    className = "",
+    showSideBar = false,
+    SideBarComponent,
+    NavBarComponent,
+  } = props
   return (
     <Fragment>
       <header>
-        <NavigationBar />
+      {NavBarComponent || <NavigationBar />}
       </header>
       <main>
         <div className="PageContainer">
-          {showSideBar && <SideBar />}
+          {showSideBar && (SideBarComponent || <SideBar />)}
           <div className={`page ${className}`}>
             {children}
           </div>

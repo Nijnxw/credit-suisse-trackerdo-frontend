@@ -1,0 +1,3 @@
+test('NavigationBar renders correctly', () => {
+
+});
