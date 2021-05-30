@@ -1,11 +1,15 @@
-import Input from './Input'
-import DatePicker from './DatePicker'
 import Button from './Button'
+import DatePicker from './DatePicker'
+import IconButton from './IconButton'
+import Input from './Input'
+import Slider from './Slider'
 
 const Controls = {
-  Input,
-  DatePicker,
   Button,
+  DatePicker,
+  IconButton,
+  Input,
+  Slider,
 }
 
 export default Controls
