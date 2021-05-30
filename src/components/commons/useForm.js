@@ -11,10 +11,19 @@ export function useForm(initialValues) {
       [name]: value,
     })
   }
+
+  const handleSliderChange = (event, newValue) => {
+    setValues({
+      ...values,
+      status: newValue
+    })
+  }
+
   return {
     values,
     setValues,
-    handleInputChange
+    handleInputChange,
+    handleSliderChange,
   }
 }
 
@@ -30,8 +39,12 @@ const useStyle = makeStyles(theme => ({
 export function Form(props) {
   const { onSubmit, children } = props
   const classes = useStyle()
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    onSubmit(event.target)
+  }
   return (
-    <form className={classes.root} onSubmit={onSubmit}>
+    <form className={classes.root} onSubmit={handleSubmit}>
       {children}
     </form>
   )
