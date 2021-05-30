@@ -1,189 +1,51 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { lighten, makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
-import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
+import React, { useState } from 'react'
+import { makeStyles, withStyles } from '@material-ui/core/styles'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableContainer from '@material-ui/core/TableContainer'
+import TablePagination from '@material-ui/core/TablePagination'
+import TableRow from '@material-ui/core/TableRow'
+import Paper from '@material-ui/core/Paper'
+import Checkbox from '@material-ui/core/Checkbox'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Switch from '@material-ui/core/Switch'
+import CustomTableToolbar from './subcomponents/CustomTableToolbar'
+import CustomTableHead from './subcomponents/CustomTableHead'
+import { tasks } from '../../../utils/tempData'
+import { useHistory } from 'react-router'
 
-function createData(title, status, due_date, description) {
-  return { title, status, due_date, description };
-}
-
-const rows = [
-  createData('Task 1', 70, "2021-05-14", "Lorem ipsum dolor sit amet, consectetur adipiscing elit."),
-  createData('Task 2', 30, "2021-05-16", "Lorem ipsum dolor sit amet, consectetur adipiscing elit."),
-  createData('Task 3', 30, "2021-05-19", "Lorem ipsum dolor sit amet, consectetur adipiscing elit."),
-  createData('Task 4', 30, "2021-05-23", "Lorem ipsum dolor sit amet, consectetur adipiscing elit."),
-  createData('Task 5', 30, "2021-05-26", "Lorem ipsum dolor sit amet, consectetur adipiscing elit."),
-  createData('Task 6', 30, "2021-05-30", "Lorem ipsum dolor sit amet, consectetur adipiscing elit."),
-  createData('Task 7', 30, "2021-06-04", "Lorem ipsum dolor sit amet, consectetur adipiscing elit."),
-  createData('Task 8', 30, "2021-06-24", "Lorem ipsum dolor sit amet, consectetur adipiscing elit."),
-  createData('Task 9', 30, "2021-08-13", "Lorem ipsum dolor sit amet, consectetur adipiscing elit."), 
-  createData('Task 10', 30, "2021-09-10", "Lorem ipsum dolor sit amet, consectetur adipiscing elit."),
-];
-
-function descendingComparator(a, b, orderBy) {
+const descendingComparator = (a, b, orderBy) => {
   if (b[orderBy] < a[orderBy]) {
-    return -1;
+    return -1
   }
   if (b[orderBy] > a[orderBy]) {
-    return 1;
+    return 1
   }
-  return 0;
+  return 0
 }
 
-function getComparator(order, orderBy) {
+const getComparator = (order, orderBy) => {
   return order === 'desc'
     ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy);
+    : (a, b) => -descendingComparator(a, b, orderBy)
 }
 
-function stableSort(array, comparator) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
+const stableSort = (array, comparator) => {
+  const stabilizedThis = array.map((el, index) => [el, index])
   stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) return order;
-    return a[1] - b[1];
-  });
-  return stabilizedThis.map((el) => el[0]);
+    const order = comparator(a[0], b[0])
+    if (order !== 0) return order
+    return a[1] - b[1]
+  })
+  return stabilizedThis.map((el) => el[0])
 }
 
-const headCells = [
-  { id: 'title', numeric: false, isDate: false, disablePadding: true, label: 'Task Name' },
-  { id: 'status', numeric: true, isDate: false, disablePadding: false, label: 'Status' },
-  { id: 'due_date', numeric: false, isDate: true, disablePadding: false, label: 'Due Date' },
-  { id: 'desc', numeric: false, isDate: false, disablePadding: false, label: 'Description' },
-];
-
-function EnhancedTableHead(props) {
-  const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
-  const createSortHandler = (property) => (event) => {
-    onRequestSort(event, property);
-  };
-
-  return (
-    <TableHead>
-      <TableRow>
-        <TableCell padding="checkbox">
-          <Checkbox
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{ 'aria-label': 'select all tasks' }}
-          />
-        </TableCell>
-        {headCells.map((headCell) => (
-          <TableCell
-            key={headCell.id}
-            align={headCell.numeric ? 'right' : headCell.isDate ? 'center' : 'left'}
-            padding={headCell.disablePadding ? 'none' : 'default'}
-            sortDirection={orderBy === headCell.id ? order : false}
-          >
-            <TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
-              onClick={createSortHandler(headCell.id)}
-            >
-              {headCell.label}
-              {orderBy === headCell.id ? (
-                <span className={classes.visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                </span>
-              ) : null}
-            </TableSortLabel>
-          </TableCell>
-        ))}
-      </TableRow>
-    </TableHead>
-  );
-}
-
-EnhancedTableHead.propTypes = {
-  classes: PropTypes.object.isRequired,
-  numSelected: PropTypes.number.isRequired,
-  onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
-  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
-  orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired,
-};
-
-const useToolbarStyles = makeStyles((theme) => ({
-  root: {
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(1),
-  },
-  highlight:
-    theme.palette.type === 'light'
-      ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-        }
-      : {
-          color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark,
-        },
-  title: {
-    flex: '1 1 100%',
-  },
-}));
-
-const EnhancedTableToolbar = (props) => {
-  const classes = useToolbarStyles();
-  const { numSelected, title } = props;
-
-  return (
-    <Toolbar
-      className={clsx(classes.root, {
-        [classes.highlight]: numSelected > 0,
-      })}
-    >
-      {numSelected > 0 ? (
-        <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
-          {numSelected} selected
-        </Typography>
-      ) : (
-        <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-          {title}
-        </Typography>
-      )}
-
-      {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton aria-label="delete">
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          <IconButton aria-label="filter list">
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
-      )}
-    </Toolbar>
-  );
-};
-
-EnhancedTableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-};
+const HoverTitleCell = withStyles((theme) => ({
+  body: {
+    cursor: 'pointer'
+  }
+}))(TableCell)
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -207,77 +69,80 @@ const useStyles = makeStyles((theme) => ({
     top: 20,
     width: 1,
   },
-}));
+  checkbox: {
+    zIndex: 6,
+  },
+}))
 
 const CustomTable = (props) => {
-  const {
-    data=rows,
-    title='Tasks',
-  } = props
-  const classes = useStyles();
-  const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('due_date');
-  const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const { data = tasks, title = 'Tasks' } = props
+  const history = useHistory()
+  const classes = useStyles()
+  const [order, setOrder] = useState('asc')
+  const [orderBy, setOrderBy] = useState('due_date')
+  const [selected, setSelected] = useState([])
+  const [page, setPage] = useState(0)
+  const [dense, setDense] = useState(false)
+  const [rowsPerPage, setRowsPerPage] = useState(5)
 
   const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(property);
-  };
+    const isAsc = orderBy === property && order === 'asc'
+    setOrder(isAsc ? 'desc' : 'asc')
+    setOrderBy(property)
+  }
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = data.map((n) => n.title);
-      setSelected(newSelecteds);
-      return;
+      const newSelecteds = data.map((n) => n.title)
+      setSelected(newSelecteds)
+      return
     }
-    setSelected([]);
-  };
+    setSelected([])
+  }
 
-  const handleClick = (event, title) => {
-    const selectedIndex = selected.indexOf(title);
-    let newSelected = [];
+  const handleSelect = (event, title) => {
+    const selectedIndex = selected.indexOf(title)
+    let newSelected = []
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, title);
+      newSelected = newSelected.concat(selected, title)
     } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
+      newSelected = newSelected.concat(selected.slice(1))
     } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
+      newSelected = newSelected.concat(selected.slice(0, -1))
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
         selected.slice(0, selectedIndex),
         selected.slice(selectedIndex + 1),
-      );
+      )
     }
 
-    setSelected(newSelected);
-  };
+    setSelected(newSelected)
+  }
 
   const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+    setPage(newPage)
+  }
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
+    setRowsPerPage(parseInt(event.target.value, 10))
+    setPage(0)
+  }
 
   const handleChangeDense = (event) => {
-    setDense(event.target.checked);
-  };
+    setDense(event.target.checked)
+  }
 
-  const isSelected = (title) => selected.indexOf(title) !== -1;
+  const handleClick = (event) => history.push(`/app/view-task/${event.target.id}`)
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+  const isSelected = (title) => selected.indexOf(title) !== -1
+
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
 
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} title={title}/>
+        <CustomTableToolbar numSelected={selected.length} title={title}/>
         <TableContainer>
           <Table
             className={classes.table}
@@ -285,7 +150,7 @@ const CustomTable = (props) => {
             size={dense ? 'small' : 'medium'}
             aria-label="enhanced table"
           >
-            <EnhancedTableHead
+            <CustomTableHead
               classes={classes}
               numSelected={selected.length}
               order={order}
@@ -298,33 +163,33 @@ const CustomTable = (props) => {
               {stableSort(data, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.title);
-                  const labelId = `enhanced-table-checkbox-${index}`;
+                  const { id, title, status, due_date, description } = row
+                  const isItemSelected = isSelected(title)
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.title)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.title}
+                      key={title}
                       selected={isItemSelected}
                     >
-                      <TableCell padding="checkbox">
+                      <TableCell classname="checkbox" padding="checkbox">
                         <Checkbox
                           checked={isItemSelected}
-                          inputProps={{ 'aria-labelledby': labelId }}
+                          inputProps={{ 'aria-labelledby': id }}
+                          onClick={(event) => handleSelect(event, title)}
                         />
                       </TableCell>
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.title}
-                      </TableCell>
-                      <TableCell align="right">{row.status}</TableCell>
-                      <TableCell align="center">{row.due_date}</TableCell>
-                      <TableCell align="left">{row.description}</TableCell>
+                      <HoverTitleCell component="th" id={id} scope="row" padding="none" onClick={handleClick}>
+                        {title}
+                      </HoverTitleCell>
+                      <TableCell align="right">{status}</TableCell>
+                      <TableCell align="center">{due_date}</TableCell>
+                      <TableCell align="left">{description}</TableCell>
                     </TableRow>
-                  );
+                  )
                 })}
               {emptyRows > 0 && (
                 <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
@@ -349,7 +214,7 @@ const CustomTable = (props) => {
         label="Dense padding"
       />
     </div>
-  );
+  )
 }
 
 export default CustomTable

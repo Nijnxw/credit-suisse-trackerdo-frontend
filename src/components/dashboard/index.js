@@ -3,6 +3,7 @@ import { Redirect, Route, Switch } from 'react-router';
 import Inbox from '../inbox';
 import Notifications from '../notifications';
 import Progress from '../progress';
+import ViewTask from '../task/ViewTask';
 import Today from '../today';
 import Upcoming from '../upcoming';
 
@@ -15,6 +16,7 @@ const Dashboard = () => (
       <Route path='/app/upcoming' component={Upcoming} />
       <Route path='/app/progress' component={Progress} />
       <Route path='/app/notifications' component={Notifications} />
+      <Route path='/app/view-task/:id' component={ViewTask} />
       <Route component={redirectTo404} />
     </Switch>
   </div>
