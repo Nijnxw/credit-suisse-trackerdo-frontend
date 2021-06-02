@@ -5,7 +5,8 @@ import { useHistory, useParams } from "react-router";
 import Controls from "../commons/controls/Controls.js";
 import PageContainer from "../commons/PageContainer"
 import { Form, useForm } from "../commons/useForm.js";
-import { tasks } from "../../utils/tempData.js";
+import { useEffect, useState } from "react";
+import tasks from "../../service/tasks.js";
 
 const useStyle = makeStyles(theme => ({
   pageContent: {
@@ -14,16 +15,27 @@ const useStyle = makeStyles(theme => ({
   }
 }))
 
-const ViewTask = ({ data }) => {
-  const { title, status, due_date, description } = data || tasks[0]
-  const { id } = useParams();
+const ViewTask = () => {
+  const [data, setData] = useState({})
+  const { id } = useParams()
   const classes = useStyle()
   const history = useHistory()
+
+  useEffect(() => {
+    tasks.getTaskById(id)
+      .then(res => { 
+        setData(res)
+        setStatusValue(res.status)
+      })
+  }, [id])
+
+  const [statusValue, setStatusValue] = useState(0)
+  const { title, due_date, description } = data
   const {
     values,
     setValues,
     handleSliderChange,
-  } = useForm({ status })
+  } = useForm({ status: statusValue })
 
   const handleEdit = () => {
     history.push(`/app/edit-task/${id}`)
@@ -38,7 +50,7 @@ const ViewTask = ({ data }) => {
   }
 
   const handleReset = () => {
-    setValues({ status })
+    setValues({ status: statusValue })
   }
 
   const handleCancel = () => {
