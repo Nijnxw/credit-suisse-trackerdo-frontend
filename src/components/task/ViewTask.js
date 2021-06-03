@@ -7,6 +7,7 @@ import PageContainer from "../commons/PageContainer"
 import { Form, useForm } from "../commons/useForm.js";
 import { useEffect, useState } from "react";
 import tasks from "../../service/tasks.js";
+import toast from "react-hot-toast";
 
 const useStyle = makeStyles(theme => ({
   pageContent: {
@@ -42,19 +43,25 @@ const ViewTask = () => {
   }
 
   const handleDelete = () => {
-    console.log('handle delete task')
+    tasks.deleteTaskById(id)
+      .then(() => { 
+        history.push(`/app/inbox`) 
+        toast.success("Deleted task")
+      })
+      .catch(err => { toast.error("Unable to delete task") })
   }
 
   const handleSave = () => {
-    console.log('handle save task')
+    tasks.updateTaskById(id, values)
+      .then(() => { 
+        history.push(`/app/inbox`) 
+        toast.success("Progress updated")
+      })
+      .catch(err => { toast.error("Unable to update progress") })
   }
 
   const handleReset = () => {
     setValues({ status: statusValue })
-  }
-
-  const handleCancel = () => {
-    history.goBack()
   }
 
   return (
@@ -78,9 +85,8 @@ const ViewTask = () => {
         <h2>Progress</h2>
         <Form onSubmit={handleSave}>
           <Controls.Slider name='status' value={values.status} onChange={handleSliderChange} />
-          <Controls.Button type='submit' text='Save' />
-          <Controls.Button text='Reset' color='default' onClick={handleReset} />
-          <Controls.Button text='Cancel' variant='outlined' onClick={handleCancel} />
+          <Controls.Button type='submit' text='Update Progress' />
+          <Controls.Button text='Reset' variant='outlined' onClick={handleReset} />
         </Form>
       </Paper>
     </PageContainer>

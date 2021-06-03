@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import Dashboard from "./dashboard";
 
@@ -6,6 +7,7 @@ function Application() {
   return (
     <Router>
       <div className="Application">
+        <div><Toaster position="bottom-right"/></div>
         <div className="Application__main">
           <Switch>
             <Route path='/app' component={toDashboard} />

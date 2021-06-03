@@ -31,10 +31,18 @@ const getTaskById = async (id) => {
 }
 
 const addNewTask = async (data) => {
-  console.log(data)
   return api.post('/api/tasks/new', data)
-    .then(res => { console.log(res) })
-    .catch(err => { console.log(err) })
+    .catch(err => { throw err })
+}
+
+const updateTaskById = async (id, data) => {
+  return api.put(`/api/tasks/${id}`, data)
+    .catch(err => { throw err })
+}
+
+const deleteTaskById = async (id) => {
+  return api.delete(`/api/tasks/${id}`)
+  .catch(err => { throw err })
 }
 
 const tasks = {
@@ -44,6 +52,8 @@ const tasks = {
   getTodayTasks,
   getTaskById,
   addNewTask,
+  updateTaskById,
+  deleteTaskById,
 }
 
 export default tasks;

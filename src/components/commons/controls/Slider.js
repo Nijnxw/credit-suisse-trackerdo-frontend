@@ -10,7 +10,7 @@ const useStyles = makeStyles({
 });
 
 const Slider = (props) => {
-  const { label, name, value, onChange, ...others } = props
+  const { label, name, value=0, onChange, ...others } = props
   const classes = useStyles();
 
   return (
