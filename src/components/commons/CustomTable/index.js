@@ -160,7 +160,7 @@ const CustomTable = (props) => {
               {stableSort(data, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const { id, title, status, due_date, description } = row
+                  const { id, title, status, dueDate, description } = row
                   const isItemSelected = isSelected(title)
 
                   return (
@@ -183,7 +183,7 @@ const CustomTable = (props) => {
                         {title}
                       </HoverTitleCell>
                       <TableCell align="right">{status}</TableCell>
-                      <TableCell align="center">{due_date}</TableCell>
+                      <TableCell align="center">{dueDate}</TableCell>
                       <TableCell align="left">{description}</TableCell>
                     </TableRow>
                   )

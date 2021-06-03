@@ -30,7 +30,7 @@ const ViewTask = () => {
   }, [id])
 
   const [statusValue, setStatusValue] = useState(0)
-  const { title, due_date, description } = data
+  const { title, dueDate, description } = data
   const {
     values,
     setValues,
@@ -72,7 +72,7 @@ const ViewTask = () => {
         <h2>Task Name</h2>
         <Typography variant="body1">{title}</Typography>
         <h2>Due Date</h2>
-        <Typography variant="body1">{due_date}</Typography>
+        <Typography variant="body1">{dueDate}</Typography>
         <h2>Description</h2>
         <Typography align="justify" variant="body1">{description}</Typography>
         <h2>Progress</h2>
