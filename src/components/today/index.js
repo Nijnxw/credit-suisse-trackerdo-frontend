@@ -4,16 +4,19 @@ import PageContainer from "../commons/PageContainer"
 import tasks from "../../service/tasks"
 
 const Today = () => {
-  const [data, setData] = useState([])
+  const [overduedTasks, setOverduedTasks] = useState([])
+  const [todayTasks, setTodayTasks] = useState([])
   useEffect(() => {
-    tasks.getTasks()
-      .then(res => { setData(res) })
+    tasks.getOverduedTasks()
+      .then(res => { setOverduedTasks(res) })
+    tasks.getTodayTasks()
+      .then(res => { setTodayTasks(res) })
   }, [])
   return (
     <PageContainer className="Today" showSideBar={true}>
       <h1>Today</h1>
-      <CustomTable title='Overdued' data={data} />
-      <CustomTable title="Today's Task" data={data} />
+      <CustomTable title='Overdued' data={overduedTasks} />
+      <CustomTable title="Today's Task" data={todayTasks} />
     </PageContainer>
   )
 }

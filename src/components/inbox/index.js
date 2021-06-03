@@ -7,7 +7,7 @@ import PageContainer from "../commons/PageContainer"
 const Inbox = () => {
   const [data, setData] = useState([])
   useEffect(() => {
-    tasks.getTasks()
+    tasks.getOngoingTasks()
       .then(res => { setData(res) })
   }, [])
 
