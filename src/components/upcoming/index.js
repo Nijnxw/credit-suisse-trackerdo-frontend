@@ -1,13 +1,20 @@
+import React, { useEffect, useState } from "react"
 import CustomTable from "../commons/CustomTable/index"
 import PageContainer from "../commons/PageContainer"
 import Controls from "../commons/controls/Controls"
 import { Form, useForm } from "../commons/useForm"
+import tasks from "../../service/tasks"
 
 const initialValues = {
   date: new Date(),
 }
 
 const Upcoming = () => {
+  const [data, setData] = useState([])
+  useEffect(() => {
+    tasks.getTasks()
+      .then(res => { setData(res) })
+  }, [])
   const {
     values,
     handleInputChange
@@ -30,7 +37,7 @@ const Upcoming = () => {
           />
         </Form>
       </div>
-      <CustomTable title='Upcoming' />
+      <CustomTable title='Upcoming' data={data} />
     </PageContainer>
   )
 }

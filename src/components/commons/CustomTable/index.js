@@ -12,7 +12,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Switch from '@material-ui/core/Switch'
 import CustomTableToolbar from './subcomponents/CustomTableToolbar'
 import CustomTableHead from './subcomponents/CustomTableHead'
-import { tasks } from '../../../utils/tempData'
 import { useHistory } from 'react-router'
 
 const descendingComparator = (a, b, orderBy) => {
@@ -75,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const CustomTable = (props) => {
-  const { data = tasks, title = 'Tasks' } = props
+  const { data = [], title = 'Tasks' } = props
   const history = useHistory()
   const classes = useStyles()
   const [order, setOrder] = useState('asc')
@@ -137,8 +136,6 @@ const CustomTable = (props) => {
 
   const isSelected = (title) => selected.indexOf(title) !== -1
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
-
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -175,7 +172,7 @@ const CustomTable = (props) => {
                       key={title}
                       selected={isItemSelected}
                     >
-                      <TableCell classname="checkbox" padding="checkbox">
+                      <TableCell className="checkbox" padding="checkbox">
                         <Checkbox
                           checked={isItemSelected}
                           inputProps={{ 'aria-labelledby': id }}
@@ -191,11 +188,6 @@ const CustomTable = (props) => {
                     </TableRow>
                   )
                 })}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
             </TableBody>
           </Table>
         </TableContainer>
