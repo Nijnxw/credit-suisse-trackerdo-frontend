@@ -1,15 +1,18 @@
 import { Grid } from "@material-ui/core"
+import { useHistory } from "react-router"
+import tasks from "../../service/tasks"
 import Controls from "../commons/controls/Controls"
 import { Form, useForm } from "../commons/useForm"
 
 
 const initialValues = {
   title: '',
-  dueDate: new Date(),
   description: '',
+  dueDate: new Date(),
 }
 
 const AddTaskForm = () => {
+  const history = useHistory()
   const {
     values,
     setValues,
@@ -21,7 +24,11 @@ const AddTaskForm = () => {
   }
 
   const handleSubmit = (e) => {
-    console.log(values)
+    tasks.addNewTask(values)
+      .then(() => {
+        // add alert to show successful submission
+        history.push('/app/inbox')
+      })
   }
 
   return (

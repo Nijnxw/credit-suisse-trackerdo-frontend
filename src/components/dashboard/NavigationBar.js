@@ -34,7 +34,7 @@ const NavigationBar = () => {
         <NavLink
           activeClassName="pt-active"
           className="NavigationBar__link pt-button pt-minimal"
-          to="/app/inbox/add-task"
+          to="/app/add-task"
         >
           <Icon icon={IconNames.PLUS} />
         </NavLink>

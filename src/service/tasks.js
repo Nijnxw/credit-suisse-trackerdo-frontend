@@ -12,9 +12,17 @@ const getTaskById = async (id) => {
     .catch(err => { throw err })
 }
 
+const addNewTask = async (data) => {
+  console.log(data)
+  return api.post('/api/tasks/new', data)
+    .then(res => { console.log(res) })
+    .catch(err => { console.log(err) })
+}
+
 const tasks = {
   getTasks,
   getTaskById,
+  addNewTask,
 }
 
 export default tasks;
