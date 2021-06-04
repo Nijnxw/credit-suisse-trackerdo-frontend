@@ -1,4 +1,5 @@
 import { Grid } from "@material-ui/core"
+import toast from "react-hot-toast"
 import { useHistory } from "react-router"
 import tasks from "../../service/tasks"
 import Controls from "../commons/controls/Controls"
@@ -26,9 +27,10 @@ const AddTaskForm = () => {
   const handleSubmit = (e) => {
     tasks.addNewTask(values)
       .then(() => {
-        // add alert to show successful submission
         history.push('/app/inbox')
+        toast.success("Created new task")
       })
+      .catch(err => { toast.error("Unable to create new task") })
   }
 
   return (

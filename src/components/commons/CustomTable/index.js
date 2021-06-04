@@ -13,6 +13,8 @@ import Switch from '@material-ui/core/Switch'
 import CustomTableToolbar from './subcomponents/CustomTableToolbar'
 import CustomTableHead from './subcomponents/CustomTableHead'
 import { useHistory } from 'react-router'
+import tasks from '../../../service/tasks'
+import toast from 'react-hot-toast'
 
 const descendingComparator = (a, b, orderBy) => {
   if (b[orderBy] < a[orderBy]) {
@@ -92,19 +94,19 @@ const CustomTable = (props) => {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = data.map((n) => n.title)
+      const newSelecteds = data.map((n) => n.id)
       setSelected(newSelecteds)
       return
     }
     setSelected([])
   }
 
-  const handleSelect = (event, title) => {
-    const selectedIndex = selected.indexOf(title)
+  const handleSelect = (event, id) => {
+    const selectedIndex = selected.indexOf(id)
     let newSelected = []
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, title)
+      newSelected = newSelected.concat(selected, id)
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1))
     } else if (selectedIndex === selected.length - 1) {
@@ -136,10 +138,18 @@ const CustomTable = (props) => {
 
   const isSelected = (title) => selected.indexOf(title) !== -1
 
+  const handleSelectedDelete = () => {
+    selected.forEach(id => {
+      tasks.deleteTaskById(id)
+    })
+    window.location.reload(false);
+    toast.success('Deleted task(s)')
+  }
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <CustomTableToolbar numSelected={selected.length} title={title}/>
+        <CustomTableToolbar numSelected={selected.length} title={title} handleSelectedDelete={handleSelectedDelete} />
         <TableContainer>
           <Table
             className={classes.table}
@@ -161,7 +171,7 @@ const CustomTable = (props) => {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const { id, title, status, dueDate, description } = row
-                  const isItemSelected = isSelected(title)
+                  const isItemSelected = isSelected(id)
 
                   return (
                     <TableRow
@@ -176,7 +186,7 @@ const CustomTable = (props) => {
                         <Checkbox
                           checked={isItemSelected}
                           inputProps={{ 'aria-labelledby': id }}
-                          onClick={(event) => handleSelect(event, title)}
+                          onClick={(event) => handleSelect(event, id)}
                         />
                       </TableCell>
                       <HoverTitleCell component="th" id={id} scope="row" padding="none" onClick={handleClick}>
