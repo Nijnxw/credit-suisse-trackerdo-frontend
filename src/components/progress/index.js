@@ -1,11 +1,19 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Divider, Grid, Link, Typography } from "@material-ui/core"
 import PageContainer from "../commons/PageContainer"
 import Donut from "./Donut"
 import BarChart from "./BarChart"
+import progress from "../../service/progress"
 
 const Progress = () => {
-  const [completed, setCompleted] = useState(0)
+  const [data, setData] = useState({})
+  
+  useEffect(() => {
+    progress.getStatistics()
+    .then(res => { setData(res) })
+  }, [])
+  
+  const { completed, inProgress, overdued, notStarted} = data || {}
 
   const handleClick = (e) => {
     e.preventDefault()
@@ -35,7 +43,7 @@ const Progress = () => {
 
       <h2>Statistics</h2>
       <Divider variant="fullWidth" />
-      <Donut />
+      <Donut data={[completed, inProgress, notStarted, overdued]} />
 
       <h2>Completed in the last 7 days</h2>
       <Divider variant="fullWidth" />

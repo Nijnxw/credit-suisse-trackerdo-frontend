@@ -12,7 +12,7 @@ const useStyle = makeStyles(theme => ({
   }
 }))
 
-function BarChart() {
+function BarChart({data}) {
   const classes = useStyle()
   const dailyGoal = 3
   const state = {
@@ -60,7 +60,6 @@ function BarChart() {
           series={state.series}
           type="bar"
           width='700px'
-          minWidth='400px'
         />
       </Grid>
     </Paper>

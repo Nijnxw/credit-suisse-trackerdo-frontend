@@ -14,13 +14,14 @@ const useStyle = makeStyles(theme => ({
   }
 }))
 
-function Donut() {
+function Donut({ data }) {
+  console.log(data)
   const classes = useStyle()
   const state = {
     options: {
       labels: ['Completed', 'In-progress', 'Not started', 'Overdued']
     },
-    series: [44, 55, 41, 17]
+    series: data || [44, 55, 41, 17]
   }
 
   return (
@@ -29,9 +30,8 @@ function Donut() {
         <Chart
           options={state.options}
           series={state.series}
-          type="donut"
+          type='donut'
           width='400px'
-          minWidth='300px'
         />
       </Grid>
     </Paper>
