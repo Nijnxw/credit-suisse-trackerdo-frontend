@@ -6,14 +6,12 @@ import BarChart from "./BarChart"
 import progress from "../../service/progress"
 
 const Progress = () => {
-  const [data, setData] = useState({})
+  const [data, setData] = useState([])
   
   useEffect(() => {
     progress.getStatistics()
     .then(res => { setData(res) })
   }, [])
-  
-  const { completed, inProgress, overdued, notStarted} = data || {}
 
   const handleClick = (e) => {
     e.preventDefault()
@@ -31,7 +29,7 @@ const Progress = () => {
         alignItems="center"
       >
         <Typography>
-          <b>{completed}</b>
+          <b>{data ? data[0] : 0}</b>
           {' completed tasks'}
         </Typography>
         <Typography>
@@ -43,7 +41,7 @@ const Progress = () => {
 
       <h2>Statistics</h2>
       <Divider variant="fullWidth" />
-      <Donut data={[completed, inProgress, notStarted, overdued]} />
+      <Donut data={data} />
 
       <h2>Completed in the last 7 days</h2>
       <Divider variant="fullWidth" />
