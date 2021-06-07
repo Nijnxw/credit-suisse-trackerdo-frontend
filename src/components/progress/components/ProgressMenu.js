@@ -4,21 +4,42 @@ import { makeStyles } from '@material-ui/core/styles'
 import Popover from '@material-ui/core/Popover'
 import Typography from '@material-ui/core/Typography'
 import { TrendingUp } from '@material-ui/icons'
-import { Box, Grid, Link, Tab, Tabs, withStyles } from '@material-ui/core'
+import { Grid, Link, Tab, Tabs, withStyles } from '@material-ui/core'
 import { useEffect } from 'react'
 import progress from '../../../service/progress'
 import Donut from '../Donut'
+import ProgressCircularBar from './ProgressCircularBar'
 
 const useStyles = makeStyles((theme) => ({
-  typography: {
-    padding: theme.spacing(2),
-  },
   menuContainer: {
     width: theme.spacing(40),
     padding: theme.spacing(1.5),
   },
+  headerContainer: {
+    paddingBottom: theme.spacing(1),
+  },
+  tabContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
+  },
   tab: {
     textTransform: 'none',
+  },
+  divider: {
+    paddingTop: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+  },
+  footer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: theme.spacing(1.5),
+    paddingBottom: theme.spacing(0.5)
+  },
+  goalText: {
+    textTransform: 'uppercase',
+    color: theme.palette.primary.dark,
   }
 }));
 
@@ -31,6 +52,7 @@ const StyledTab = withStyles({
 
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
+  const classes = useStyles();
 
   return (
     <div
@@ -41,9 +63,9 @@ const TabPanel = (props) => {
       {...other}
     >
       {value === index && (
-        <Box p={1}>
+        <Grid container className={classes.tabContainer}>
           {children}
-        </Box>
+        </Grid>
       )}
     </div>
   );
@@ -85,7 +107,12 @@ const ProgressMenu = () => {
 
   return (
     <div>
-      <TrendingUp fontSize='small' style={{fill: '#106ba3'}} className={classNames("NavigationBar__link pt-button pt-minimal")} onClick={handleClick} />
+      <TrendingUp 
+        className={classNames("NavigationBar__link pt-button pt-minimal")} 
+        onClick={handleClick} 
+        fontSize='small' 
+        style={{fill: '#106ba3'}} 
+      />
       <Popover
         id={id}
         open={open}
@@ -109,6 +136,7 @@ const ProgressMenu = () => {
             justify="space-between"
             alignItems="center"
             width='500px'
+            className={classes.headerContainer}
           >
             <Typography variant="body2">
               <b>{data ? data[0] : 0}</b>
@@ -132,15 +160,39 @@ const ProgressMenu = () => {
             <StyledTab label="Weekly" {...a11yProps(1)} />
             <StyledTab label="Overall" {...a11yProps(2)} />
           </Tabs>
+
           <TabPanel value={tab} index={0}>
-            <Typography variant='body2'><b>Daily goal: 2 / 3 tasks</b></Typography>
+            <Grid 
+              container
+              direction="row"
+              justify='space-around'
+              alignItems='center'
+            >
+              <Grid item>
+                <ProgressCircularBar data={[67]} />
+              </Grid>
+              <Grid item xs container direction='column'>
+                <Grid item xs>
+                  <Typography variant='body2'><b>Daily goal: 2 / 3 tasks</b></Typography>
+                  <Typography variant='caption'>You're on your way!</Typography>
+                </Grid>
+              </Grid>
+            </Grid>
           </TabPanel>
+
           <TabPanel value={tab} index={1}>
           <Typography variant='body2'><b>Mon, 18 Apr 2021 - Sun, 25 Apr 2021</b></Typography>
           </TabPanel>
+          
           <TabPanel value={tab} index={2}>
             <Donut noPaper data={data}/>
           </TabPanel>
+
+          <div className={classes.divider} />
+
+          <Grid container className={classes.footer}>
+            <Typography variant='caption' className={classes.goalText}>Goal Setting</Typography>
+          </Grid>
 
         </div>
       </Popover>
