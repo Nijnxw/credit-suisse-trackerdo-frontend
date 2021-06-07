@@ -8,6 +8,7 @@ import { Form, useForm } from "../commons/useForm.js";
 import { useEffect, useState } from "react";
 import tasks from "../../service/tasks.js";
 import toast from "react-hot-toast";
+import dateUtils from "../../utils/date.utils.js";
 
 const useStyle = makeStyles(theme => ({
   pageContent: {
@@ -79,7 +80,7 @@ const ViewTask = () => {
         <h2>Task Name</h2>
         <Typography variant="body1">{title}</Typography>
         <h2>Due Date</h2>
-        <Typography variant="body1">{dueDate}</Typography>
+        <Typography variant="body1">{dateUtils.convertToReadableDate(dueDate)}</Typography>
         <h2>Description</h2>
         <Typography align="justify" variant="body1">{description}</Typography>
         <h2>Progress</h2>

@@ -15,6 +15,7 @@ import CustomTableHead from './subcomponents/CustomTableHead'
 import { useHistory } from 'react-router'
 import tasks from '../../../service/tasks'
 import toast from 'react-hot-toast'
+import dateUtils from '../../../utils/date.utils'
 
 const descendingComparator = (a, b, orderBy) => {
   if (b[orderBy] < a[orderBy]) {
@@ -193,7 +194,7 @@ const CustomTable = (props) => {
                         {title}
                       </HoverTitleCell>
                       <TableCell align="right">{status}</TableCell>
-                      <TableCell align="center">{dueDate}</TableCell>
+                      <TableCell align="center">{dateUtils.convertToReadableDate(dueDate)}</TableCell>
                       <TableCell align="left">{description}</TableCell>
                     </TableRow>
                   )
