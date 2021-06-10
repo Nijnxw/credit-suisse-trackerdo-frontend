@@ -12,6 +12,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Switch from '@material-ui/core/Switch'
 import CustomTableToolbar from './subcomponents/CustomTableToolbar'
 import CustomTableHead from './subcomponents/CustomTableHead'
+import ProgressBar from '../ProgressBar'
 import { useHistory } from 'react-router'
 import tasks from '../../../service/tasks'
 import toast from 'react-hot-toast'
@@ -193,8 +194,10 @@ const CustomTable = (props) => {
                       <HoverTitleCell component="th" id={id} scope="row" padding="none" onClick={handleClick}>
                         {title}
                       </HoverTitleCell>
-                      <TableCell align="right">{status}</TableCell>
-                      <TableCell align="center">{dateUtils.convertToReadableDate(dueDate)}</TableCell>
+                      <TableCell align="center">
+                        <ProgressBar value={status} />  
+                      </TableCell>
+                      <TableCell align="left">{dateUtils.convertToReadableDate(dueDate)}</TableCell>
                       <TableCell align="left">{description}</TableCell>
                     </TableRow>
                   )

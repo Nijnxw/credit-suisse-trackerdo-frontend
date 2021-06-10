@@ -22,22 +22,22 @@ const ViewTask = () => {
   const { id } = useParams()
   const classes = useStyle()
   const history = useHistory()
-
-  useEffect(() => {
-    tasks.getTaskById(id)
-      .then(res => { 
-        setData(res)
-        setStatusValue(res.status)
-      })
-  }, [id])
-
-  const [statusValue, setStatusValue] = useState(0)
+  
   const { title, dueDate, description } = data
   const {
     values,
     setValues,
     handleSliderChange,
-  } = useForm({ status: statusValue })
+  } = useForm({ status: 0 })
+
+  useEffect(() => {
+    tasks.getTaskById(id)
+      .then(res => { 
+        setData(res)
+        setValues({ status: res.status })
+      })
+  }, [id])
+
 
   const handleEdit = () => {
     history.push(`/app/edit-task/${id}`)
@@ -62,7 +62,7 @@ const ViewTask = () => {
   }
 
   const handleReset = () => {
-    setValues({ status: statusValue })
+    setValues({ status: data.status })
   }
 
   return (
@@ -84,6 +84,7 @@ const ViewTask = () => {
         <h2>Description</h2>
         <Typography align="justify" variant="body1">{description}</Typography>
         <h2>Progress</h2>
+        {/* <ProgressBar value={data.status} containerStyle={{ width: 300 }} /> */}
         <Form onSubmit={handleSave}>
           <Controls.Slider name='status' value={values.status} onChange={handleSliderChange} />
           <Controls.Button type='submit' text='Update Progress' />

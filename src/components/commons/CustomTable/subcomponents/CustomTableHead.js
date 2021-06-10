@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import { Checkbox, TableCell, TableHead, TableRow, TableSortLabel, withStyles } from "@material-ui/core"
 
 const headCells = [
-  { id: 'title', numeric: false, isDate: false, disablePadding: true, label: 'Task Name' },
-  { id: 'status', numeric: true, isDate: false, disablePadding: false, label: 'Status' },
-  { id: 'due_date', numeric: false, isDate: true, disablePadding: false, label: 'Due Date' },
-  { id: 'desc', numeric: false, isDate: false, disablePadding: false, label: 'Description' },
+  { id: 'title', disablePadding: true, label: 'Task Name' },
+  { id: 'status', disablePadding: false, label: 'Status' },
+  { id: 'due_date', disablePadding: false, label: 'Due Date' },
+  { id: 'desc', disablePadding: false, label: 'Description' },
 ]
 
 const StyledTableCell = withStyles((theme) => ({
@@ -35,7 +35,7 @@ const CustomTableHead = (props) => {
         {headCells.map((headCell) => (
           <StyledTableCell
             key={headCell.id}
-            align={headCell.numeric ? 'right' : headCell.isDate ? 'center' : 'left'}
+            align={'left'}
             padding={headCell.disablePadding ? 'none' : 'default'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
