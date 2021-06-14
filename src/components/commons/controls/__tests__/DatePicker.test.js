@@ -1,3 +1,0 @@
-test('DatePicker renders correctly', () => {
-
-});

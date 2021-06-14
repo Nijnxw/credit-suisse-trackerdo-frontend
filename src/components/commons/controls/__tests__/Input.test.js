@@ -1,3 +1,0 @@
-test('Input renders correctly', () => {
-
-});

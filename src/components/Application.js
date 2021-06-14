@@ -1,3 +1,4 @@
+import React from 'react'
 import { Toaster } from "react-hot-toast";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import Dashboard from "./dashboard";

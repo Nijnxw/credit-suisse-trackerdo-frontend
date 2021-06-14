@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Application renders correctly 1`] = `
+"<BrowserRouter>
+  <div className=\\"Application\\">
+    <div>
+      <Toaster position=\\"bottom-right\\" />
+    </div>
+    <div className=\\"Application__main\\">
+      <Switch>
+        <Route path=\\"/app\\" component={[Function: toDashboard]} />
+        <Route exact={true} path=\\"/\\" render={[Function: redirectToDashboard]} />
+      </Switch>
+    </div>
+  </div>
+</BrowserRouter>"
+`;
