@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Application renders correctly 1`] = `
+exports[`<Application /> rendering should render correctly 1`] = `
 "<BrowserRouter>
   <div className=\\"Application\\">
     <div>

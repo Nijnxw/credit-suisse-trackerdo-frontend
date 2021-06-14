@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NavigationBar /> rendering should render correctly 1`] = `
+"<Blueprint3.Navbar className=\\"NavigationBar primary-navbar pt-dark\\">
+  <Blueprint3.NavbarGroup align=\\"left\\">
+    <NavLink activeClassName=\\"pt-active\\" className=\\"NavigationBar__link pt-button pt-minimal bp3-button\\" to=\\"/\\">
+      <Blueprint3.Icon icon=\\"book\\" />
+      <Blueprint3.NavbarHeading className=\\"hidden-xs\\">
+        Trackerdo
+      </Blueprint3.NavbarHeading>
+    </NavLink>
+  </Blueprint3.NavbarGroup>
+  <Blueprint3.NavbarGroup align=\\"right\\">
+    <ProgressMenu />
+    <div className=\\"hidden-xs\\">
+      <Blueprint3.NavbarDivider className=\\"default-divider\\" />
+    </div>
+    <NavLink activeClassName=\\"pt-active\\" className=\\"NavigationBar__link pt-button pt-minimal\\" to=\\"/app/add-task\\">
+      <Memo(ForwardRef(AddIcon)) fontSize=\\"small\\" />
+    </NavLink>
+    <div className=\\"hidden-xs\\">
+      <Blueprint3.NavbarDivider className=\\"default-divider\\" />
+    </div>
+    <NavLink activeClassName=\\"pt-active\\" className=\\"NavigationBar__link pt-button pt-minimal\\" to=\\"/app/notifications\\">
+      <Memo(ForwardRef(NotificationsIcon)) fontSize=\\"small\\" />
+    </NavLink>
+    <div className=\\"hidden-xs\\">
+      <Blueprint3.NavbarDivider className=\\"default-divider\\" />
+    </div>
+  </Blueprint3.NavbarGroup>
+</Blueprint3.Navbar>"
+`;

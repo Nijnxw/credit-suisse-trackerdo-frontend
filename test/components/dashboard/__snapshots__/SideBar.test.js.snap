@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SideBar /> rendering should render correctly 1`] = `
+"<div className=\\"SideBar\\">
+  <WithStyles(ForwardRef(List)) disablePadding={true} dense={true}>
+    <WithStyles(ForwardRef(ListItem)) button={true}>
+      <NavLink activeClassName=\\"pt-active\\" className=\\"SideBar__link menu-item\\" to=\\"/app/inbox\\">
+        <WithStyles(ForwardRef(Icon)) component={{...}} />
+        <WithStyles(ForwardRef(ListItemText)) className=\\"menu-item-label\\">
+          Inbox
+        </WithStyles(ForwardRef(ListItemText))>
+      </NavLink>
+    </WithStyles(ForwardRef(ListItem))>
+    <WithStyles(ForwardRef(ListItem)) button={true}>
+      <NavLink activeClassName=\\"pt-active\\" className=\\"SideBar__link menu-item\\" to=\\"/app/today\\">
+        <WithStyles(ForwardRef(Icon)) component={{...}} />
+        <WithStyles(ForwardRef(ListItemText)) className=\\"menu-item-label\\">
+          Today
+        </WithStyles(ForwardRef(ListItemText))>
+      </NavLink>
+    </WithStyles(ForwardRef(ListItem))>
+    <WithStyles(ForwardRef(ListItem)) button={true}>
+      <NavLink activeClassName=\\"pt-active\\" className=\\"SideBar__link menu-item\\" to=\\"/app/upcoming\\">
+        <WithStyles(ForwardRef(Icon)) component={{...}} />
+        <WithStyles(ForwardRef(ListItemText)) className=\\"menu-item-label\\">
+          Upcoming
+        </WithStyles(ForwardRef(ListItemText))>
+      </NavLink>
+    </WithStyles(ForwardRef(ListItem))>
+    <WithStyles(ForwardRef(ListItem)) button={true}>
+      <NavLink activeClassName=\\"pt-active\\" className=\\"SideBar__link menu-item\\" to=\\"/app/progress\\">
+        <WithStyles(ForwardRef(Icon)) component={{...}} />
+        <WithStyles(ForwardRef(ListItemText)) className=\\"menu-item-label\\">
+          Progress
+        </WithStyles(ForwardRef(ListItemText))>
+      </NavLink>
+    </WithStyles(ForwardRef(ListItem))>
+    <WithStyles(ForwardRef(ListItem)) button={true}>
+      <NavLink activeClassName=\\"pt-active\\" className=\\"SideBar__link menu-item\\" to=\\"/app/notifications\\">
+        <WithStyles(ForwardRef(Icon)) component={{...}} />
+        <WithStyles(ForwardRef(ListItemText)) className=\\"menu-item-label\\">
+          Notifications
+        </WithStyles(ForwardRef(ListItemText))>
+      </NavLink>
+    </WithStyles(ForwardRef(ListItem))>
+  </WithStyles(ForwardRef(List))>
+</div>"
+`;
