@@ -36,6 +36,7 @@ const ViewTask = () => {
         setData(res)
         setValues({ status: res.status })
       })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
 
 

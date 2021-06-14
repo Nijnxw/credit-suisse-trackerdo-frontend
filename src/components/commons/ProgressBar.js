@@ -20,6 +20,7 @@ const ProgressBar = ({ value = 0, containerStyle = {} }) => {
 
   useEffect(() => {
     animation()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value])
   
   return (
